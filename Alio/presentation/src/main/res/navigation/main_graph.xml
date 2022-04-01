@@ -9,12 +9,20 @@
         android:id="@+id/mainFragment"
         android:name="com.project.alio.view.fragment.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_statsFragment"
+            app:destination="@id/statsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/statsFragment"
         android:name="com.project.alio.view.fragment.StatsFragment"
         android:label="fragment_stats"
-        tools:layout="@layout/fragment_stats" />
+        tools:layout="@layout/fragment_stats" >
+        <action
+            android:id="@+id/action_statsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 
 
 </navigation>
