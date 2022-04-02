@@ -2,12 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/mainFragment"
-        android:title="메인"/>
+        android:title="메인"
+        android:icon="@drawable/ic_home"/>
 
     <item android:id="@+id/placeHolder"
         android:title=""/>
 
     <item android:id="@+id/statsFragment"
-        android:title="통계" />
+        android:title="통계"
+        android:icon="@drawable/ic_stats"/>
 
 </menu>
