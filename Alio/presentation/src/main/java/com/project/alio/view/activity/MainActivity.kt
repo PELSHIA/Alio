@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainFragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
+        binding.bottomNavigationView.menu.getItem(1).isEnabled = false
         binding.bottomNavigationView.setupWithNavController(navController)
 
     }
