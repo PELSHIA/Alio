@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragment.AlarmSettingFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.project.alio.view.activity.AlarmSettingActivity" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradient">
+        android:background="@drawable/background_gradient"
+        tools:context=".view.activity.AlarmSettingActivity">
 
         <TextView
             android:id="@+id/alarm_setting_title"
@@ -63,67 +68,81 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/alarm_hour_picker">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/sunday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/background_week_unselected"
+                android:gravity="center"
                 android:text="일"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:setWeekClick="@{activity}" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/monday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:padding="6dp"
+                android:background="@drawable/background_week_unselected"
+                android:gravity="center"
                 android:text="월"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:setWeekClick="@{activity}" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/tuesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:padding="6dp"
+                android:background="@drawable/background_week_unselected"
+                android:gravity="center"
                 android:text="화"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:setWeekClick="@{activity}" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/wednesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:padding="6dp"
+                android:background="@drawable/background_week_unselected"
+                android:gravity="center"
                 android:text="수"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:setWeekClick="@{activity}" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Thursday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:padding="6dp"
+                android:background="@drawable/background_week_unselected"
+                android:gravity="center"
                 android:text="목"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:setWeekClick="@{activity}" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/friday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:padding="6dp"
+                android:background="@drawable/background_week_unselected"
+                android:gravity="center"
                 android:text="금"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:setWeekClick="@{activity}" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/saturday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:padding="6dp"
+                android:background="@drawable/background_week_unselected"
+                android:gravity="center"
                 android:text="토"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:setWeekClick="@{activity}" />
 
         </LinearLayout>
 
@@ -137,14 +156,22 @@
             android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@id/week_layout" />
 
-        <Spinner
-            android:id="@+id/category_spinner"
+        <FrameLayout
+            android:id="@+id/category_spinner_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
+            android:background="@drawable/background_radius_5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/alarm_setting_name" />
+            app:layout_constraintTop_toBottomOf="@id/alarm_setting_name">
+
+            <Spinner
+                android:id="@+id/category_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/category_title"
@@ -152,18 +179,26 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:text="카테고리"
-            app:layout_constraintBottom_toBottomOf="@id/category_spinner"
-            app:layout_constraintEnd_toStartOf="@id/category_spinner"
-            app:layout_constraintTop_toTopOf="@id/category_spinner" />
+            app:layout_constraintBottom_toBottomOf="@id/category_spinner_layout"
+            app:layout_constraintEnd_toStartOf="@id/category_spinner_layout"
+            app:layout_constraintTop_toTopOf="@id/category_spinner_layout" />
 
-        <Spinner
-            android:id="@+id/mission_spinner"
+        <FrameLayout
+            android:id="@+id/mission_spinner_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
+            android:background="@drawable/background_radius_5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/category_title" />
+            app:layout_constraintTop_toBottomOf="@id/category_title">
+
+            <Spinner
+                android:id="@+id/mission_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/mission_title"
@@ -171,9 +206,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:text="알람 미션"
-            app:layout_constraintBottom_toBottomOf="@id/mission_spinner"
-            app:layout_constraintEnd_toStartOf="@id/mission_spinner"
-            app:layout_constraintTop_toTopOf="@id/mission_spinner" />
+            app:layout_constraintBottom_toBottomOf="@id/mission_spinner_layout"
+            app:layout_constraintEnd_toStartOf="@id/mission_spinner_layout"
+            app:layout_constraintTop_toTopOf="@id/mission_spinner_layout" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ringtone"
@@ -181,7 +216,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
+            android:background="@drawable/background_radius_5dp"
             android:drawableStart="@drawable/ic_music"
+            android:padding="10dp"
             android:text="벨소리 설정"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mission_title" />
@@ -192,12 +229,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="30dp"
+            android:background="@drawable/background_radius_5dp"
+            android:elevation="5dp"
             android:text="확인"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</FrameLayout>
+</layout>
