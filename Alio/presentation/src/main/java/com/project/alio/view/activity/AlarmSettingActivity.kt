@@ -2,6 +2,7 @@ package com.project.alio.view.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.NumberPicker
 import androidx.appcompat.app.AppCompatActivity
 import com.project.alio.R
@@ -19,6 +20,7 @@ class AlarmSettingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initPicker()
+        initSpinner()
     }
 
     private fun initPicker() {
@@ -30,5 +32,16 @@ class AlarmSettingActivity : AppCompatActivity() {
         binding.alarmMinutePicker.maxValue = 59
         binding.alarmMinutePicker.setFormatter { i -> String.format("%02d", i) }
 
+    }
+
+    private fun initSpinner() {
+        val initCategory = resources.getStringArray(R.array.spinner_category)
+        val initMission = resources.getStringArray(R.array.spinner_mission)
+
+        val categoryAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, initCategory)
+        val missionAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, initMission)
+
+        binding.categorySpinner.adapter = categoryAdapter
+        binding.missionSpinner.adapter = missionAdapter
     }
 }

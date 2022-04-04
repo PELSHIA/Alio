@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_category">
+        <item>기상</item>
+        <item>추가</item>
+    </string-array>
+
+    <string-array name="spinner_mission">
+        <item>할 일 작성</item>
+        <item>사진 찍기</item>
+        <item>명언 따라쓰기</item>
+    </string-array>
+</resources>
