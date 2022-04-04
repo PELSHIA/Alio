@@ -1,8 +1,10 @@
 package com.project.alio.view.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.project.alio.R
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initNavigation()
+        navigateAlarmSetting()
     }
 
     private fun initNavigation() {
@@ -27,5 +30,11 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.menu.getItem(1).isEnabled = false
         binding.bottomNavigationView.setupWithNavController(navController)
 
+    }
+
+    private fun navigateAlarmSetting() {
+        binding.fab.setOnClickListener {
+            startActivity(Intent(this, AlarmSettingActivity::class.java))
+        }
     }
 }
