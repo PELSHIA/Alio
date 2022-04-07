@@ -49,6 +49,7 @@ class RingtoneRecyclerViewAdapter: RecyclerView.Adapter<RingtoneRecyclerViewAdap
             if (b) {
                 selectedPosition = holder.adapterPosition
                 onItemClickListener.onClick(dataList[position].title, dataList[position].uri)
+                notifyDataSetChanged()
             }
         }
     }
