@@ -17,7 +17,12 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
+        initView()
         return binding.root
+    }
+
+    private fun initView() {
+        binding.view.layoutParams.width = binding.alarmListTitle.width
     }
 
 }
