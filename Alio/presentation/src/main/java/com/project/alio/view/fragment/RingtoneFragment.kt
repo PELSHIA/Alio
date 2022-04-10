@@ -21,8 +21,7 @@ class RingtoneFragment : Fragment() {
 
     private lateinit var binding: FragmentRingtoneBinding
     private lateinit var recyclerViewAdapter: RingtoneRecyclerViewAdapter
-    private lateinit var onItemClickListener: RingtoneRecyclerViewAdapter.OnItemClickListener
-    private lateinit var ringtone: Ringtone
+    private var ringtone: Ringtone? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +44,11 @@ class RingtoneFragment : Fragment() {
         }
         val dataList = listRingtones()
         recyclerViewAdapter.setData(dataList)
+        Log.d("ringtone", "${recyclerViewAdapter.defaultRingtone}")
         recyclerViewAdapter.setOnItemClickListener { s, uri ->
+            ringtone?.stop()
             ringtone = RingtoneManager.getRingtone(activity, uri)
-            ringtone.play()
+            ringtone?.play()
         }
     }
 
@@ -67,7 +68,7 @@ class RingtoneFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        ringtone.stop()
+        ringtone?.stop()
     }
 
 }
