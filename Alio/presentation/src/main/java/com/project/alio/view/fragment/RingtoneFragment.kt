@@ -10,7 +10,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.alio.databinding.FragmentRingtoneBinding
 import com.project.alio.view.adapter.recyclerView.RingtoneRecyclerViewAdapter
@@ -22,6 +24,7 @@ class RingtoneFragment : Fragment() {
     private lateinit var binding: FragmentRingtoneBinding
     private lateinit var recyclerViewAdapter: RingtoneRecyclerViewAdapter
     private var ringtone: Ringtone? = null
+    private lateinit var ringToneData: RingTone
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,7 @@ class RingtoneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        navigate()
     }
 
     private fun initRecyclerView() { // Ringtone RecyclerView Setting
@@ -44,10 +48,10 @@ class RingtoneFragment : Fragment() {
         }
         val dataList = listRingtones()
         recyclerViewAdapter.setData(dataList)
-        Log.d("ringtone", "${recyclerViewAdapter.defaultRingtone}")
-        recyclerViewAdapter.setOnItemClickListener { s, uri ->
+        recyclerViewAdapter.setOnItemClickListener { title, uri ->
             ringtone?.stop()
             ringtone = RingtoneManager.getRingtone(activity, uri)
+            ringToneData = RingTone(title, uri)
             ringtone?.play()
         }
     }
@@ -64,6 +68,16 @@ class RingtoneFragment : Fragment() {
         }
         cursor.close()
         return ringtoneList
+    }
+
+    private fun navigate() {
+        binding.ringtoneSelectButton.setOnClickListener {
+            if (ringtone != null) {
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(activity, "벨소리를 선택해주세요", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroy() {
