@@ -11,6 +11,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.data.db.sharedpreferences.RingtonePreferences
 import com.project.alio.databinding.FragmentRingtoneBinding
 import com.project.alio.view.adapter.recyclerView.RingtoneRecyclerViewAdapter
 import com.example.domain.model.entity.RingTone
@@ -69,6 +70,7 @@ class RingtoneFragment : Fragment() {
     private fun navigate() {
         binding.ringtoneSelectButton.setOnClickListener {
             if (ringtone != null) {
+                RingtonePreferences.ringtone = ringToneData
                 findNavController().popBackStack()
             } else {
                 Toast.makeText(activity, "벨소리를 선택해주세요", Toast.LENGTH_SHORT).show()
