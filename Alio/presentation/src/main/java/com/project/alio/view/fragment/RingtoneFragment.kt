@@ -1,16 +1,13 @@
 package com.project.alio.view.fragment
 
-import android.content.Context
-import android.database.Cursor
 import android.media.Ringtone
 import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +46,7 @@ class RingtoneFragment : Fragment() {
         recyclerViewAdapter.setData(dataList)
         recyclerViewAdapter.setOnItemClickListener { title, uri ->
             ringtone?.stop()
-            ringtone = RingtoneManager.getRingtone(activity, uri)
+            ringtone = RingtoneManager.getRingtone(activity, uri.toUri())
             ringToneData = RingTone(title, uri)
             ringtone?.play()
         }
@@ -63,7 +60,7 @@ class RingtoneFragment : Fragment() {
         while (cursor.moveToNext()) {
             val title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
             val ringtoneURI = manager.getRingtoneUri(cursor.position)
-            ringtoneList.add(RingTone(title, ringtoneURI))
+            ringtoneList.add(RingTone(title, ringtoneURI.toString()))
         }
         cursor.close()
         return ringtoneList

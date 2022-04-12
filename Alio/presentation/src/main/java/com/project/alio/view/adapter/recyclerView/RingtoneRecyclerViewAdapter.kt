@@ -14,7 +14,7 @@ class RingtoneRecyclerViewAdapter: RecyclerView.Adapter<RingtoneRecyclerViewAdap
     private lateinit var onItemClickListener: OnItemClickListener
 
     interface OnItemClickListener {
-        fun onClick(title: String, uri: Uri)
+        fun onClick(title: String, uri: String)
     }
 
     fun setData(list: MutableList<RingTone>) {
@@ -23,9 +23,9 @@ class RingtoneRecyclerViewAdapter: RecyclerView.Adapter<RingtoneRecyclerViewAdap
         notifyDataSetChanged()
     }
 
-    fun setOnItemClickListener(listener: (String, Uri) -> Unit) {
+    fun setOnItemClickListener(listener: (String, String) -> Unit) {
         onItemClickListener = object : OnItemClickListener {
-            override fun onClick(title: String, uri: Uri) {
+            override fun onClick(title: String, uri: String) {
                 listener(title, uri)
             }
         }

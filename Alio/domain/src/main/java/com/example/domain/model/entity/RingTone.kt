@@ -5,5 +5,5 @@ import java.net.URI
 
 data class RingTone(
     val title: String,
-    val uri: Uri
+    val uri: String
 )
