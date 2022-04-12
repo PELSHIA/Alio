@@ -1,7 +1,6 @@
-package com.project.alio.view.adapter.binding
+package com.project.alio.util.binding
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
