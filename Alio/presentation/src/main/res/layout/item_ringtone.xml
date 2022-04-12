@@ -7,7 +7,7 @@
 
         <variable
             name="ringtone"
-            type="com.project.alio.view.adapter.recyclerView.data.RingTone" />
+            type="com.example.domain.model.entity.RingTone" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

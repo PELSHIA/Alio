@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.alio.databinding.ItemRingtoneBinding
-import com.project.alio.view.adapter.recyclerView.data.RingTone
+import com.example.domain.model.entity.RingTone
 
 class RingtoneRecyclerViewAdapter: RecyclerView.Adapter<RingtoneRecyclerViewAdapter.ViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.project.alio.view.adapter.recyclerView.data
+package com.example.domain.model.entity
 
 import android.net.Uri
 import java.net.URI

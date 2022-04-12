@@ -16,8 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.alio.databinding.FragmentRingtoneBinding
 import com.project.alio.view.adapter.recyclerView.RingtoneRecyclerViewAdapter
-import com.project.alio.view.adapter.recyclerView.data.RingTone
-import kotlinx.coroutines.delay
+import com.example.domain.model.entity.RingTone
 
 class RingtoneFragment : Fragment() {
 
