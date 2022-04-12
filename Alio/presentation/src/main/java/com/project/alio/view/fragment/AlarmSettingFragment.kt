@@ -26,10 +26,15 @@ class AlarmSettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         initPicker()
         initSpinner()
 //        bindSpinner()
         setRingtone()
+    }
+
+    private fun initView() {
+        binding.view.layoutParams.width = binding.alarmSettingTitle.width
     }
 
     private fun initPicker() {
