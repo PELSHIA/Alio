@@ -1,7 +1,7 @@
 package com.example.data.db.room.dao
 
 import androidx.room.*
-import com.example.data.db.room.entity.Alarm
+import com.example.data.db.room.model.AlarmEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
@@ -9,15 +9,15 @@ import io.reactivex.rxjava3.core.Single
 interface AlarmDao {
 
     @Query("SELECT * FROM alarm_db")
-    fun allAlarmList(): Single<List<Alarm>>
+    fun allAlarmList(): Single<List<AlarmEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAlarm(alarm: Alarm): Completable
+    fun insertAlarm(alarm: AlarmEntity): Completable
 
     @Delete
-    fun deleteAlarm(alarm: Alarm): Completable
+    fun deleteAlarm(alarm: AlarmEntity): Completable
 
     @Update
-    fun updateAlarm(alarm: Alarm): Completable
+    fun updateAlarm(alarm: AlarmEntity): Completable
 
 }
