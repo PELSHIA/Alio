@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.data.db.sharedpreferences.RingtonePreferences
 import com.project.alio.databinding.FragmentRingtoneBinding
 import com.project.alio.view.adapter.recyclerView.RingtoneRecyclerViewAdapter
-import com.example.domain.model.entity.RingTone
+import com.example.domain.model.RingTone
 
 class RingtoneFragment : Fragment() {
 
