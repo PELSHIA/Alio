@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.project.alio.R
 import com.project.alio.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding

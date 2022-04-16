@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.project.alio.R
 import com.project.alio.databinding.FragmentAlarmSettingBinding
 import com.project.alio.view.activity.AlarmSettingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AlarmSettingFragment : Fragment() {
 
     private lateinit var binding: FragmentAlarmSettingBinding

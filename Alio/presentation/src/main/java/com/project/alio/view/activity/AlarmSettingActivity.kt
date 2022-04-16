@@ -10,8 +10,10 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.appcompat.app.AppCompatActivity
 import com.project.alio.R
 import com.project.alio.databinding.ActivityAlarmSettingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class AlarmSettingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAlarmSettingBinding
