@@ -5,7 +5,7 @@ import com.example.data.db.room.model.AlarmEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
-class AlarmLocalSourceImpl(private val alarmDao: AlarmDao): AlarmLocalSource {
+class AlarmLocalSourceDataImpl(private val alarmDao: AlarmDao): AlarmLocalDataSource {
     override fun allAlarmList(): Single<List<AlarmEntity>> {
         return alarmDao.allAlarmList()
     }

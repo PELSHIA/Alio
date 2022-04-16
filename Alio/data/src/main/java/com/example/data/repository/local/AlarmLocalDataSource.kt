@@ -4,7 +4,7 @@ import com.example.data.db.room.model.AlarmEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
-interface AlarmLocalSource {
+interface AlarmLocalDataSource {
     fun allAlarmList(): Single<List<AlarmEntity>>
 
     fun insertAlarm(alarm: AlarmEntity): Completable
