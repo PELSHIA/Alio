@@ -15,3 +15,14 @@ fun mapperToAlarmList(alarmList: List<AlarmEntity>): List<Alarm> {
         )
     }
 }
+
+fun mapperToAlarmEntity(alarm: Alarm): AlarmEntity {
+    return AlarmEntity(
+        alarm.id,
+        alarm.name,
+        alarm.time,
+        alarm.category,
+        alarm.mission,
+        alarm.ringtone
+    )
+}
