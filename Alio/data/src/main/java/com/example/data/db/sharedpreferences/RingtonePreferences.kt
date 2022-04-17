@@ -2,7 +2,7 @@ package com.example.data.db.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.domain.model.entity.RingTone
+import com.example.domain.model.RingTone
 import com.google.gson.Gson
 
 object RingtonePreferences {

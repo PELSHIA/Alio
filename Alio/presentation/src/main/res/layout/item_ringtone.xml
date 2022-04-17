@@ -7,7 +7,7 @@
 
         <variable
             name="ringtone"
-            type="com.example.domain.model.entity.RingTone" />
+            type="com.example.domain.model.RingTone" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
