@@ -13,11 +13,11 @@ abstract class BaseViewModel: ViewModel() {
         get() = _isLoading
 
     fun loading() {
-        _isLoading.value = true
+        _isLoading.postValue(false)
     }
 
     fun stopLoading() {
-        _isLoading.value = false
+        _isLoading.postValue(false)
     }
 
     override fun onCleared() {
