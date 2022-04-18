@@ -1,11 +1,10 @@
-package com.project.alio.view.adapter.recyclerView
+package com.project.alio.view.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.alio.databinding.ItemRingtoneBinding
-import com.example.domain.model.entity.RingTone
+import com.example.domain.model.RingTone
 
 class RingtoneRecyclerViewAdapter: RecyclerView.Adapter<RingtoneRecyclerViewAdapter.ViewHolder>() {
 
