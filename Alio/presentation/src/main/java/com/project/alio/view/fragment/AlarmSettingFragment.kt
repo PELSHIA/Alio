@@ -157,6 +157,10 @@ class AlarmSettingFragment : Fragment() {
     }
 
     private fun getDayOfWeek(): ArrayList<Boolean> {
+        val isSelect = ContextCompat.getDrawable(
+            activity as Context,
+            R.drawable.background_week_selected
+        )
         return arrayListOf(
             binding.monday.background == isSelect,
             binding.tuesday.background == isSelect,
