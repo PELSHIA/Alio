@@ -141,6 +141,7 @@ class AlarmSettingFragment : Fragment() {
 
     private fun settingAlarm() {
         val pIntent: PendingIntent = settingIntent()
+        alarmManager = activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
