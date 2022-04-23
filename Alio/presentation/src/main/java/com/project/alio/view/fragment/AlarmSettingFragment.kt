@@ -148,6 +148,7 @@ class AlarmSettingFragment : Fragment() {
             AlarmManager.INTERVAL_DAY,
             pIntent
         )
+        findNavController().popBackStack()
     }
 
     private fun settingIntent(): PendingIntent {
