@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,10 +32,6 @@ class AlarmSettingFragment : Fragment() {
     private val viewModel: AlarmViewModel by viewModels()
     private val calendar: Calendar = Calendar.getInstance()
     private lateinit var alarmManager: AlarmManager
-    private val isSelect = ContextCompat.getDrawable(
-        activity as Context,
-        R.drawable.background_week_selected
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +48,7 @@ class AlarmSettingFragment : Fragment() {
         initPicker()
         initSpinner()
 //        bindSpinner()
+        bindCheckButton()
         setRingtone()
     }
 
@@ -106,7 +104,13 @@ class AlarmSettingFragment : Fragment() {
 
     private fun bindCheckButton() {
         binding.alarmSettingCheck.setOnClickListener {
-            setAlarmData()
+            if (binding.alarmSettingName.text.isEmpty()) {
+                Toast.makeText(activity, "알람명을 작성해주세요", Toast.LENGTH_SHORT).show()
+            } else if (RingtonePreferences.ringtone == null) {
+                Toast.makeText(activity, "밸소리를 세팅해주세요", Toast.LENGTH_SHORT).show()
+            } else {
+                setAlarmData()
+            }
         }
     }
 
