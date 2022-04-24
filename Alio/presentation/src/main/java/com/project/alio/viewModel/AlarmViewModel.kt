@@ -28,8 +28,8 @@ class AlarmViewModel @Inject constructor(
 
     fun allAlarmList() {
         compositeDisposable.add(
-            getAllAlarmListUseCase.execute().subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
+            getAllAlarmListUseCase.execute().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { loading() }
                 .doAfterTerminate { stopLoading() }
                 .subscribe({
@@ -44,8 +44,8 @@ class AlarmViewModel @Inject constructor(
 
     fun insertAlarm(alarm: Alarm) {
         compositeDisposable.add(
-            insertAlarmUseCase.execute(alarm).subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
+            insertAlarmUseCase.execute(alarm).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { loading() }
                 .doAfterTerminate { stopLoading() }
                 .subscribe()
@@ -54,8 +54,8 @@ class AlarmViewModel @Inject constructor(
 
     fun deleteAlarm(alarm: Alarm) {
         compositeDisposable.add(
-            deleteAlarmUseCase.execute(alarm).subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
+            deleteAlarmUseCase.execute(alarm).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { loading() }
                 .doAfterTerminate { stopLoading() }
                 .subscribe()
@@ -64,8 +64,8 @@ class AlarmViewModel @Inject constructor(
 
     fun updateAlarm(alarm: Alarm) {
         compositeDisposable.add(
-            updateAlarmUseCase.execute(alarm).subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
+            updateAlarmUseCase.execute(alarm).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { loading() }
                 .doAfterTerminate { stopLoading() }
                 .subscribe()
