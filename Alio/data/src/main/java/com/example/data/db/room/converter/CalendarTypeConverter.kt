@@ -15,7 +15,7 @@ class CalendarTypeConverter(private val gson: Gson) {
     }
 
     @TypeConverter
-    fun jsonToRingtone(value: String): Calendar {
+    fun jsonToCalendar(value: String): Calendar {
         return gson.fromJson(value, Calendar::class.java)
     }
 }

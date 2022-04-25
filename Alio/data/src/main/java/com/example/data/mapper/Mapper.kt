@@ -9,6 +9,7 @@ fun mapperToAlarmList(alarmList: List<AlarmEntity>): List<Alarm> {
             it.id,
             it.name,
             it.time,
+            it.dayOfWeek,
             it.category,
             it.mission,
             it.ringtone
@@ -21,6 +22,7 @@ fun mapperToAlarmEntity(alarm: Alarm): AlarmEntity {
         alarm.id,
         alarm.name,
         alarm.time,
+        alarm.dayOfWeek,
         alarm.category,
         alarm.mission,
         alarm.ringtone

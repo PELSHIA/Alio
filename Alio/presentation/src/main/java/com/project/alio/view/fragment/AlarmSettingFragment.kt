@@ -126,6 +126,7 @@ class AlarmSettingFragment : Fragment() {
                 UUID.randomUUID().toString(),
                 alarmName,
                 calendar,
+                getDayOfWeek(),
                 category,
                 mission,
                 ringtone!!
