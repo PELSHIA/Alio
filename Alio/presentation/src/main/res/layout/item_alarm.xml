@@ -33,6 +33,7 @@
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:setTime="@{alarm.time}"
                 tools:text="08:00" />
 
             <LinearLayout
@@ -118,9 +119,9 @@
                 android:id="@+id/alarm_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{alarm.category}"
                 android:textColor="@color/gray"
                 android:textSize="12sp"
-                android:text="@{alarm.category}"
                 tools:text="기상" />
 
             <TextView
