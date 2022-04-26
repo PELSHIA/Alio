@@ -4,7 +4,9 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -157,18 +159,19 @@ class AlarmSettingFragment : Fragment() {
     }
 
     private fun settingIntent(): PendingIntent {
-        val dayOfWeek: ArrayList<Boolean> = getDayOfWeek()
+        val dayOfWeek: ArrayList<Boolean> = arrayListOf()
+        dayOfWeek.addAll(getDayOfWeek())
         val intent: Intent = Intent(activity, AlarmBroadcastReceiver::class.java)
         intent.putExtra("dayOfWeek", dayOfWeek)
         return PendingIntent.getBroadcast(activity, 0, intent, 0)
     }
 
-    private fun getDayOfWeek(): ArrayList<Boolean> {
+    private fun getDayOfWeek(): List<Boolean> {
         val isSelect = ContextCompat.getDrawable(
             activity as Context,
             R.drawable.background_week_selected
         )
-        return arrayListOf(
+        return listOf(
             binding.monday.background == isSelect,
             binding.tuesday.background == isSelect,
             binding.wednesday.background == isSelect,

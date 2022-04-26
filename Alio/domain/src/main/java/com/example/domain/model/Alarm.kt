@@ -7,7 +7,7 @@ data class Alarm(
     val id: String,
     val name: String,
     val time: Calendar,
-    val dayOfWeek: ArrayList<Boolean>,
+    val dayOfWeek: List<Boolean>,
     val category: String,
     val mission: String,
     val ringtone: RingTone

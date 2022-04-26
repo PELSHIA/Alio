@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.data.db.room.converter.ArrayListTypeConverter
+import com.example.data.db.room.converter.ListTypeConverter
 import com.example.data.db.room.converter.CalendarTypeConverter
 import com.example.data.db.room.converter.RingtoneTypeConverter
 import com.example.data.db.room.dao.AlarmDao
@@ -17,7 +17,7 @@ import com.google.gson.Gson
     value = [
         RingtoneTypeConverter::class,
         CalendarTypeConverter::class,
-        ArrayListTypeConverter::class
+        ListTypeConverter::class
     ]
 )
 abstract class AlarmDatabase : RoomDatabase() {
@@ -35,7 +35,7 @@ abstract class AlarmDatabase : RoomDatabase() {
                 )
                     .addTypeConverter(RingtoneTypeConverter(Gson()))
                     .addTypeConverter(CalendarTypeConverter(Gson()))
-                    .addTypeConverter(ArrayListTypeConverter(Gson()))
+                    .addTypeConverter(ListTypeConverter(Gson()))
                     .build()
             }
             return instance
