@@ -22,6 +22,7 @@ import com.example.domain.model.Alarm
 import com.project.alio.R
 import com.project.alio.databinding.FragmentAlarmSettingBinding
 import com.project.alio.view.activity.AlarmSettingActivity
+import com.project.alio.view.activity.MainActivity
 import com.project.alio.viewModel.AlarmViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -155,10 +156,16 @@ class AlarmSettingFragment : Fragment() {
             AlarmManager.INTERVAL_DAY,
             pIntent
         )
-        findNavController().popBackStack()
+        activityPopStack()
     }
 
-    private fun settingIntent(): PendingIntent {
+    private fun activityPopStack() {
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
+    }
+
+    private fun settingIntent(day: List<Boolean>): PendingIntent {
         val dayOfWeek: ArrayList<Boolean> = arrayListOf()
         dayOfWeek.addAll(getDayOfWeek())
         val intent: Intent = Intent(activity, AlarmBroadcastReceiver::class.java)
