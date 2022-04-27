@@ -51,7 +51,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="일"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[0]}"/>
 
                 <TextView
                     android:id="@+id/alarm_monday"
@@ -59,7 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:text="월"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[1]}"/>
 
                 <TextView
                     android:id="@+id/alarm_tuesday"
@@ -67,7 +69,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:text="화"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[2]}"/>
 
                 <TextView
                     android:id="@+id/alarm_wednesday"
@@ -75,7 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:text="수"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[3]}"/>
 
                 <TextView
                     android:id="@+id/alarm_thursday"
@@ -83,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:text="목"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[4]}"/>
 
                 <TextView
                     android:id="@+id/alarm_friday"
@@ -91,7 +96,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:text="금"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[5]}"/>
 
                 <TextView
                     android:id="@+id/alarm_saturday"
@@ -99,7 +105,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:text="토"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[6]}"/>
 
             </LinearLayout>
 
