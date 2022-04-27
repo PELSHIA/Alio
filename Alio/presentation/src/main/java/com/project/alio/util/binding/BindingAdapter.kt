@@ -12,28 +12,6 @@ import java.util.*
 object BindingAdapter {
 
     @JvmStatic
-    @BindingAdapter("setWeekClick")
-    fun bindSetWeekClickState(view: AppCompatButton, activity: AppCompatActivity) {
-        val select = ContextCompat.getDrawable(
-            activity as Context,
-            R.drawable.background_week_selected
-        )
-
-        val unSelect = ContextCompat.getDrawable(
-            activity as Context,
-            R.drawable.background_week_unselected
-        )
-
-        view.setOnClickListener {
-            if (view.background == select) {
-                view.background = unSelect
-            } else {
-                view.background = select
-            }
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("setTime")
     fun bindSetTime(view: TextView, time: Calendar) {
         val hour = time.get(Calendar.HOUR_OF_DAY)

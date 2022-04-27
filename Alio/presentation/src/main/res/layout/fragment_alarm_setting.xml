@@ -94,81 +94,82 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/alarm_hour_picker">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ToggleButton
                 android:id="@+id/sunday"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/background_week_unselected"
+                android:background="@drawable/selector_week"
                 android:gravity="center"
-                android:text="일"
+                android:textOn="일"
+                android:textOff="일"
                 android:textSize="12sp"
-                tools:setWeekClick="@{activity}" />
+                />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ToggleButton
                 android:id="@+id/monday"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/background_week_unselected"
+                android:background="@drawable/selector_week"
                 android:gravity="center"
-                android:text="월"
-                android:textSize="12sp"
-                tools:setWeekClick="@{activity}" />
+                android:textOn="월"
+                android:textOff="월"
+                android:textSize="12sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ToggleButton
                 android:id="@+id/tuesday"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/background_week_unselected"
+                android:background="@drawable/selector_week"
                 android:gravity="center"
-                android:text="화"
-                android:textSize="12sp"
-                tools:setWeekClick="@{activity}" />
+                android:textOn="화"
+                android:textOff="화"
+                android:textSize="12sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ToggleButton
                 android:id="@+id/wednesday"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/background_week_unselected"
+                android:background="@drawable/selector_week"
                 android:gravity="center"
-                android:text="수"
-                android:textSize="12sp"
-                tools:setWeekClick="@{activity}" />
+                android:textOn="수"
+                android:textOff="수"
+                android:textSize="12sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ToggleButton
                 android:id="@+id/Thursday"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/background_week_unselected"
+                android:background="@drawable/selector_week"
                 android:gravity="center"
-                android:text="목"
-                android:textSize="12sp"
-                tools:setWeekClick="@{activity}" />
+                android:textOn="목"
+                android:textOff="목"
+                android:textSize="12sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ToggleButton
                 android:id="@+id/friday"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/background_week_unselected"
+                android:background="@drawable/selector_week"
                 android:gravity="center"
-                android:text="금"
-                android:textSize="12sp"
-                tools:setWeekClick="@{activity}" />
+                android:textOn="금"
+                android:textOff="금"
+                android:textSize="12sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ToggleButton
                 android:id="@+id/saturday"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/background_week_unselected"
+                android:background="@drawable/selector_week"
                 android:gravity="center"
-                android:text="토"
-                android:textSize="12sp"
-                tools:setWeekClick="@{activity}" />
+                android:textOn="토"
+                android:textOff="토"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

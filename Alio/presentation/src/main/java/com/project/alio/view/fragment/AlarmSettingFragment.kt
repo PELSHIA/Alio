@@ -119,6 +119,7 @@ class AlarmSettingFragment : Fragment() {
 
     private fun setAlarmData() {
         setCalendar()
+        val dayOfWeek = getDayOfWeek()
         val alarmName = binding.alarmSettingName.text.toString()
         val category = binding.categorySpinner.selectedItem.toString()
         val mission = binding.missionSpinner.selectedItem.toString()
@@ -129,13 +130,13 @@ class AlarmSettingFragment : Fragment() {
                 UUID.randomUUID().toString(),
                 alarmName,
                 calendar,
-                getDayOfWeek(),
+                dayOfWeek,
                 category,
                 mission,
                 ringtone!!
             )
         )
-        settingAlarm()
+        settingAlarm(dayOfWeek)
     }
 
     private fun setCalendar() {
@@ -147,8 +148,8 @@ class AlarmSettingFragment : Fragment() {
         }
     }
 
-    private fun settingAlarm() {
-        val pIntent: PendingIntent = settingIntent()
+    private fun settingAlarm(day: List<Boolean>) {
+        val pIntent: PendingIntent = settingIntent(day)
         alarmManager = activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
@@ -167,25 +168,21 @@ class AlarmSettingFragment : Fragment() {
 
     private fun settingIntent(day: List<Boolean>): PendingIntent {
         val dayOfWeek: ArrayList<Boolean> = arrayListOf()
-        dayOfWeek.addAll(getDayOfWeek())
+        dayOfWeek.addAll(day)
         val intent: Intent = Intent(activity, AlarmBroadcastReceiver::class.java)
         intent.putExtra("dayOfWeek", dayOfWeek)
         return PendingIntent.getBroadcast(activity, 0, intent, 0)
     }
 
     private fun getDayOfWeek(): List<Boolean> {
-        val isSelect = ContextCompat.getDrawable(
-            activity as Context,
-            R.drawable.background_week_selected
-        )
         return listOf(
-            binding.monday.background == isSelect,
-            binding.tuesday.background == isSelect,
-            binding.wednesday.background == isSelect,
-            binding.Thursday.background == isSelect,
-            binding.friday.background == isSelect,
-            binding.saturday.background == isSelect,
-            binding.sunday.background == isSelect
+            binding.sunday.isChecked,
+            binding.monday.isChecked,
+            binding.tuesday.isChecked,
+            binding.wednesday.isChecked,
+            binding.Thursday.isChecked,
+            binding.friday.isChecked,
+            binding.saturday.isChecked
         )
     }
 
