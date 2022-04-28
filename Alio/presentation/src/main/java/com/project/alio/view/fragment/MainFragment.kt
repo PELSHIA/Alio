@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.alio.R
 import com.project.alio.databinding.FragmentMainBinding
+import com.project.alio.util.decorator.RecyclerViewDecoration
 import com.project.alio.view.adapter.AlarmRecyclerViewAdapter
 import com.project.alio.viewModel.AlarmViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,10 +40,12 @@ class MainFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
+        val decoration: RecyclerViewDecoration = RecyclerViewDecoration(40)
         binding.alarmRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             recyclerAdapter = AlarmRecyclerViewAdapter()
             adapter = recyclerAdapter
+            addItemDecoration(decoration)
         }
         setRecyclerViewData()
     }
