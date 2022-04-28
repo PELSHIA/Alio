@@ -7,140 +7,148 @@
 
         <variable
             name="alarm"
-            type="com.example.domain.model.Alarm"  />
+            type="com.example.domain.model.Alarm" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_item_alarm">
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
-        <LinearLayout
-            android:id="@+id/alarm_date_layout"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:layout_marginStart="20dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/alarm_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:setTime="@{alarm.time}"
-                tools:text="08:00" />
+            android:background="@drawable/background_item_alarm">
 
             <LinearLayout
-                android:id="@+id/alarm_week_layout"
+                android:id="@+id/alarm_date_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
+                android:layout_marginVertical="15dp"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/alarm_time"
-                app:layout_constraintTop_toBottomOf="@id/alarm_time">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/alarm_sunday"
+                    android:id="@+id/alarm_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="일"
-                    android:textSize="11sp"
-                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[0]}"/>
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setTime="@{alarm.time}"
+                    tools:text="08:00" />
 
-                <TextView
-                    android:id="@+id/alarm_monday"
+                <LinearLayout
+                    android:id="@+id/alarm_week_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:text="월"
-                    android:textSize="11sp"
-                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[1]}"/>
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/alarm_time"
+                    app:layout_constraintTop_toBottomOf="@id/alarm_time">
 
-                <TextView
-                    android:id="@+id/alarm_tuesday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:text="화"
-                    android:textSize="11sp"
-                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[2]}"/>
+                    <TextView
+                        android:id="@+id/alarm_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="일"
+                        android:textSize="11sp"
+                        tools:setMainDayOfWeek="@{alarm.dayOfWeek[0]}" />
 
-                <TextView
-                    android:id="@+id/alarm_wednesday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:text="수"
-                    android:textSize="11sp"
-                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[3]}"/>
+                    <TextView
+                        android:id="@+id/alarm_monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="월"
+                        android:textSize="11sp"
+                        tools:setMainDayOfWeek="@{alarm.dayOfWeek[1]}" />
 
-                <TextView
-                    android:id="@+id/alarm_thursday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:text="목"
-                    android:textSize="11sp"
-                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[4]}"/>
+                    <TextView
+                        android:id="@+id/alarm_tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="화"
+                        android:textSize="11sp"
+                        tools:setMainDayOfWeek="@{alarm.dayOfWeek[2]}" />
 
-                <TextView
-                    android:id="@+id/alarm_friday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:text="금"
-                    android:textSize="11sp"
-                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[5]}"/>
+                    <TextView
+                        android:id="@+id/alarm_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="수"
+                        android:textSize="11sp"
+                        tools:setMainDayOfWeek="@{alarm.dayOfWeek[3]}" />
 
-                <TextView
-                    android:id="@+id/alarm_saturday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:text="토"
-                    android:textSize="11sp"
-                    tools:setMainDayOfWeek="@{alarm.dayOfWeek[6]}"/>
+                    <TextView
+                        android:id="@+id/alarm_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="목"
+                        android:textSize="11sp"
+                        tools:setMainDayOfWeek="@{alarm.dayOfWeek[4]}" />
+
+                    <TextView
+                        android:id="@+id/alarm_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="금"
+                        android:textSize="11sp"
+                        tools:setMainDayOfWeek="@{alarm.dayOfWeek[5]}" />
+
+                    <TextView
+                        android:id="@+id/alarm_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="토"
+                        android:textSize="11sp"
+                        tools:setMainDayOfWeek="@{alarm.dayOfWeek[6]}" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/alarm_name_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/alarm_category"
+            <LinearLayout
+                android:id="@+id/alarm_name_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{alarm.category}"
-                android:textColor="@color/gray"
-                android:textSize="12sp"
-                tools:text="기상" />
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/alarm_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@{alarm.name}"
-                tools:text="일어나자"/>
+                <TextView
+                    android:id="@+id/alarm_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{alarm.category}"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    tools:text="기상" />
 
-       </LinearLayout>
+                <TextView
+                    android:id="@+id/alarm_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@{alarm.name}"
+                    tools:text="일어나자" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </layout>
