@@ -34,6 +34,7 @@ class AlarmSettingFragment : Fragment() {
     private lateinit var binding: FragmentAlarmSettingBinding
     private val viewModel: AlarmViewModel by viewModels()
     private val calendar: Calendar = Calendar.getInstance()
+    private var alarm_id: Long = 0
     private lateinit var alarmManager: AlarmManager
 
     override fun onCreateView(
@@ -51,6 +52,7 @@ class AlarmSettingFragment : Fragment() {
         initPicker()
         initSpinner()
 //        bindSpinner()
+        observe()
         bindCheckButton()
         setRingtone()
     }
@@ -127,7 +129,7 @@ class AlarmSettingFragment : Fragment() {
 
         viewModel.insertAlarm(
             Alarm(
-                UUID.randomUUID().toString(),
+                0,
                 alarmName,
                 calendar,
                 dayOfWeek,
@@ -171,7 +173,7 @@ class AlarmSettingFragment : Fragment() {
         dayOfWeek.addAll(day)
         val intent: Intent = Intent(activity, AlarmBroadcastReceiver::class.java)
         intent.putExtra("dayOfWeek", dayOfWeek)
-        return PendingIntent.getBroadcast(activity, 0, intent, 0)
+        return PendingIntent.getBroadcast(activity, alarm_id.toInt(), intent, 0)
     }
 
     private fun getDayOfWeek(): List<Boolean> {
@@ -184,6 +186,12 @@ class AlarmSettingFragment : Fragment() {
             binding.friday.isChecked,
             binding.saturday.isChecked
         )
+    }
+
+    private fun observe() = with(viewModel) {
+        alarmId.observe(viewLifecycleOwner) {
+            alarm_id = it
+        }
     }
 
     override fun onDestroy() {

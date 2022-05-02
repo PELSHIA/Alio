@@ -26,6 +26,10 @@ class AlarmViewModel @Inject constructor(
     val alarmList: LiveData<List<Alarm>>
         get() = _alarmList
 
+    private val _alarmId = MutableLiveData<Long>()
+    val alarmId: LiveData<Long>
+        get() = _alarmId
+
     fun allAlarmList() {
         compositeDisposable.add(
             getAllAlarmListUseCase.execute().subscribeOn(Schedulers.io())
@@ -48,7 +52,11 @@ class AlarmViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { loading() }
                 .doAfterTerminate { stopLoading() }
-                .subscribe()
+                .subscribe({
+                    _alarmId.value = it
+                }, {
+                    Log.d("Error", it.message.toString())
+                })
         )
     }
 

@@ -11,8 +11,8 @@ interface AlarmDao {
     @Query("SELECT * FROM alarm_db")
     fun allAlarmList(): Single<List<AlarmEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAlarm(alarm: AlarmEntity): Completable
+    @Insert
+    fun insertAlarm(alarm: AlarmEntity): Long
 
     @Delete
     fun deleteAlarm(alarm: AlarmEntity): Completable

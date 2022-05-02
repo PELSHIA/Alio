@@ -15,7 +15,7 @@ class AlarmRepositoryImpl(private val alarmLocalSource: AlarmLocalDataSource): A
         }
     }
 
-    override fun insertAlarm(alarm: Alarm): Completable {
+    override fun insertAlarm(alarm: Alarm): Single<Long> {
         return alarmLocalSource.insertAlarm(mapperToAlarmEntity(alarm))
     }
 
