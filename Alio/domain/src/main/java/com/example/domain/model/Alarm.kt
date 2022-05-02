@@ -4,7 +4,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 data class Alarm(
-    val id: String,
+    val id: Int,
     val name: String,
     val time: Calendar,
     val dayOfWeek: List<Boolean>,

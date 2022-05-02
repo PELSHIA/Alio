@@ -8,7 +8,7 @@ import kotlin.collections.ArrayList
 
 @Entity(tableName = "alarm_db")
 data class AlarmEntity(
-    @PrimaryKey val id: String,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val time: Calendar,
     val dayOfWeek: List<Boolean>,
