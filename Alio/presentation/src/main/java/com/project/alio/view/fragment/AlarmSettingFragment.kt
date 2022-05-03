@@ -109,12 +109,20 @@ class AlarmSettingFragment : Fragment() {
 
     private fun bindCheckButton() {
         binding.alarmSettingCheck.setOnClickListener {
-            if (binding.alarmSettingName.text.isEmpty()) {
-                Toast.makeText(activity, "알람명을 작성해주세요", Toast.LENGTH_SHORT).show()
-            } else if (RingtonePreferences.ringtone == null) {
-                Toast.makeText(activity, "밸소리를 세팅해주세요", Toast.LENGTH_SHORT).show()
-            } else {
-                setAlarmData()
+            Log.d("isDaySelect", isDaySelect().toString())
+            when {
+                binding.alarmSettingName.text.isEmpty() -> {
+                    Toast.makeText(activity, "알람명을 작성해주세요", Toast.LENGTH_SHORT).show()
+                }
+                RingtonePreferences.ringtone == null -> {
+                    Toast.makeText(activity, "밸소리를 세팅해주세요", Toast.LENGTH_SHORT).show()
+                }
+                !isDaySelect() -> {
+                    Toast.makeText(activity, "요일을 선택해주세요", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    setAlarmData()
+                }
             }
         }
     }
@@ -192,6 +200,16 @@ class AlarmSettingFragment : Fragment() {
         alarmId.observe(viewLifecycleOwner) {
             alarm_id = it
         }
+    }
+
+    private fun isDaySelect(): Boolean {
+        return binding.sunday.isChecked ||
+        binding.monday.isChecked ||
+        binding.tuesday.isChecked ||
+        binding.wednesday.isChecked ||
+        binding.Thursday.isChecked ||
+        binding.friday.isChecked ||
+        binding.saturday.isChecked
     }
 
     override fun onDestroy() {
