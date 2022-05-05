@@ -43,6 +43,7 @@ class AlarmSettingFragment : Fragment() {
     ): View? {
         binding = FragmentAlarmSettingBinding.inflate(inflater, container, false)
         binding.activity = activity as AlarmSettingActivity?
+        Log.d("onCreateView", binding.alarmHourPicker.value.toString())
         return binding.root
     }
 
@@ -55,6 +56,7 @@ class AlarmSettingFragment : Fragment() {
         observe()
         bindCheckButton()
         setRingtone()
+        Log.d("onCreateView", binding.alarmHourPicker.value.toString())
     }
 
     private fun initView() {
@@ -212,8 +214,28 @@ class AlarmSettingFragment : Fragment() {
         binding.saturday.isChecked
     }
 
+    override fun onStop() {
+        super.onStop()
+        Log.d("onStop", binding.alarmHourPicker.value.toString())
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("onStart", binding.alarmHourPicker.value.toString())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("onResume", binding.alarmHourPicker.value.toString())
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         RingtonePreferences.clear()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("onDestroyView", binding.alarmHourPicker.value.toString())
     }
 }
