@@ -9,6 +9,11 @@ import com.project.alio.databinding.ItemAlarmBinding
 class AlarmRecyclerViewAdapter: RecyclerView.Adapter<AlarmRecyclerViewAdapter.ViewHolder>() {
 
     private val dataList = mutableListOf<Alarm>()
+    private lateinit var onItemClickListener:OnItemClickListener
+
+    interface OnItemClickListener {
+        fun onClick(data: Alarm)
+    }
 
     fun setData(list: List<Alarm>) {
         dataList.clear()
@@ -16,7 +21,15 @@ class AlarmRecyclerViewAdapter: RecyclerView.Adapter<AlarmRecyclerViewAdapter.Vi
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: ItemAlarmBinding): RecyclerView.ViewHolder(binding.root) {
+    fun setOnItemClickListener(listener: (Alarm) -> Unit) {
+        onItemClickListener = object :OnItemClickListener {
+            override fun onClick(data: Alarm) {
+                listener(data)
+            }
+        }
+    }
+
+    inner class ViewHolder(val binding: ItemAlarmBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Alarm) {
             binding.alarm =  data
         }
@@ -29,6 +42,9 @@ class AlarmRecyclerViewAdapter: RecyclerView.Adapter<AlarmRecyclerViewAdapter.Vi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(dataList[position])
+        holder.binding.itemAlarm.setOnClickListener {
+            onItemClickListener.onClick(dataList[position])
+        }
     }
 
     override fun getItemCount() = dataList.size
