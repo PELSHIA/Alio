@@ -33,6 +33,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initRecyclerView()
+        enableBottomSheet()
     }
 
     private fun initView() {
@@ -61,6 +62,22 @@ class MainFragment : Fragment() {
                 binding.alarmRecyclerView.visibility = View.VISIBLE
                 recyclerAdapter.setData(it)
             }
+        }
+    }
+
+    private fun enableBottomSheet() {
+        recyclerAdapter.setOnItemClickListener {
+            val bottomSheet: AlarmBottomSheetFragment = AlarmBottomSheetFragment { state ->
+                when (state) {
+                    0 -> {
+
+                    }
+                    1 -> {
+
+                    }
+                }
+            }
+            bottomSheet.show(requireActivity().supportFragmentManager, bottomSheet.tag)
         }
     }
 
