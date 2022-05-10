@@ -20,4 +20,6 @@ interface AlarmDao {
     @Update
     fun updateAlarm(alarm: AlarmEntity): Completable
 
+    @Query("SELECT * FROM alarm_db WHERE id = :id")
+    fun selectAlarm(id: Int): AlarmEntity
 }
