@@ -1,10 +1,7 @@
 package com.project.alio.module
 
 import com.example.domain.repository.AlarmRepository
-import com.example.domain.useCase.DeleteAlarmUseCase
-import com.example.domain.useCase.GetAllAlarmListUseCase
-import com.example.domain.useCase.InsertAlarmUseCase
-import com.example.domain.useCase.UpdateAlarmUseCase
+import com.example.domain.useCase.*
 import com.project.alio.viewModel.AlarmViewModel
 import dagger.Module
 import dagger.Provides
@@ -38,5 +35,11 @@ object UseCaseModule {
     @Provides
     fun provideUpdateAlarmUseCase(repository: AlarmRepository): UpdateAlarmUseCase {
         return UpdateAlarmUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSelectAlarmUseCase(repository: AlarmRepository): SelectAlarmUseCase {
+        return SelectAlarmUseCase(repository)
     }
 }

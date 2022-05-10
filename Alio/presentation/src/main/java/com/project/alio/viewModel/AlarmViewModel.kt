@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.domain.model.Alarm
-import com.example.domain.useCase.DeleteAlarmUseCase
-import com.example.domain.useCase.GetAllAlarmListUseCase
-import com.example.domain.useCase.InsertAlarmUseCase
-import com.example.domain.useCase.UpdateAlarmUseCase
+import com.example.domain.useCase.*
 import com.project.alio.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -19,12 +16,17 @@ class AlarmViewModel @Inject constructor(
     private val getAllAlarmListUseCase: GetAllAlarmListUseCase,
     private val insertAlarmUseCase: InsertAlarmUseCase,
     private val deleteAlarmUseCase: DeleteAlarmUseCase,
-    private val updateAlarmUseCase: UpdateAlarmUseCase
+    private val updateAlarmUseCase: UpdateAlarmUseCase,
+    private val selectAlarmUseCase: SelectAlarmUseCase
 ) : BaseViewModel() {
 
     private val _alarmList = MutableLiveData<List<Alarm>>()
     val alarmList: LiveData<List<Alarm>>
         get() = _alarmList
+
+    private val _alarm = MutableLiveData<Alarm>()
+    val alarm: LiveData<Alarm>
+        get() = _alarm
 
     private val _alarmId = MutableLiveData<Long>()
     val alarmId: LiveData<Long>
@@ -38,7 +40,7 @@ class AlarmViewModel @Inject constructor(
                 .doAfterTerminate { stopLoading() }
                 .subscribe({
                     if (it.isNotEmpty()) {
-                        _alarmList.value = it
+                        _alarmList.postValue(it)
                     }
                 }, {
                     Log.d("Error", it.message.toString())
@@ -53,7 +55,7 @@ class AlarmViewModel @Inject constructor(
                 .doOnSubscribe { loading() }
                 .doAfterTerminate { stopLoading() }
                 .subscribe({
-                    _alarmId.value = it
+                    _alarmId.postValue(it)
                 }, {
                     Log.d("Error", it.message.toString())
                 })
@@ -77,6 +79,18 @@ class AlarmViewModel @Inject constructor(
                 .doOnSubscribe { loading() }
                 .doAfterTerminate { stopLoading() }
                 .subscribe()
+        )
+    }
+
+    fun selectAlarm(id: Int) {
+        compositeDisposable.add(
+            selectAlarmUseCase.execute(id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { loading() }
+                .doAfterTerminate { stopLoading() }
+                .subscribe({
+                    _alarm.postValue(it)
+                }, {})
         )
     }
 }

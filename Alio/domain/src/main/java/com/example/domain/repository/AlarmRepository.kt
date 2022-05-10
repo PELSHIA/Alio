@@ -12,4 +12,6 @@ interface AlarmRepository {
     fun deleteAlarm(alarm: Alarm): Completable
 
     fun updateAlarm(alarm: Alarm): Completable
+
+    fun selectAlarm(id: Int): Single<Alarm>
 }

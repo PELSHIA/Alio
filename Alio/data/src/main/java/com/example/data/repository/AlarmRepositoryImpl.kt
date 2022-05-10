@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import com.example.data.mapper.mapperToAlarm
 import com.example.data.mapper.mapperToAlarmEntity
 import com.example.data.mapper.mapperToAlarmList
 import com.example.data.repository.local.AlarmLocalDataSource
@@ -25,5 +26,11 @@ class AlarmRepositoryImpl(private val alarmLocalSource: AlarmLocalDataSource): A
 
     override fun updateAlarm(alarm: Alarm): Completable {
         return alarmLocalSource.updateAlarm(mapperToAlarmEntity(alarm))
+    }
+
+    override fun selectAlarm(id: Int): Single<Alarm> {
+        return alarmLocalSource.selectAlarm(id).flatMap {
+            Single.just(mapperToAlarm(it))
+        }
     }
 }

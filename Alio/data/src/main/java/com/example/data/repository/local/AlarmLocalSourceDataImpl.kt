@@ -22,4 +22,8 @@ class AlarmLocalSourceDataImpl(private val alarmDao: AlarmDao): AlarmLocalDataSo
     override fun updateAlarm(alarm: AlarmEntity): Completable {
         return alarmDao.updateAlarm(alarm)
     }
+
+    override fun selectAlarm(id: Int): Single<AlarmEntity> {
+        return Single.fromCallable { alarmDao.selectAlarm(id) }
+    }
 }

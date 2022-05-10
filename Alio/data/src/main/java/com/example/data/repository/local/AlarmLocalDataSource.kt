@@ -12,4 +12,6 @@ interface AlarmLocalDataSource {
     fun deleteAlarm(alarm: AlarmEntity): Completable
 
     fun updateAlarm(alarm: AlarmEntity): Completable
+
+    fun selectAlarm(id: Int): Single<AlarmEntity>
 }

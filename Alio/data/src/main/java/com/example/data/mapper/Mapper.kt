@@ -28,3 +28,15 @@ fun mapperToAlarmEntity(alarm: Alarm): AlarmEntity {
         alarm.ringtone
     )
 }
+
+fun mapperToAlarm(alarmEntity: AlarmEntity): Alarm {
+    return Alarm(
+        alarmEntity.id,
+        alarmEntity.name,
+        alarmEntity.time,
+        alarmEntity.dayOfWeek,
+        alarmEntity.category,
+        alarmEntity.mission,
+        alarmEntity.ringtone
+    )
+}
