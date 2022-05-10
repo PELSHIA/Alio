@@ -105,6 +105,7 @@ class MainFragment : Fragment() {
                 intent.putExtra("dayOfWeek", dayOfWeek)
                 alarmManager.cancel(pendingIntent)
                 viewModel.deleteAlarm(alarm) // Local DB Delete
+                recyclerAdapter.notifyDataSetChanged()
             }
         }
     }
