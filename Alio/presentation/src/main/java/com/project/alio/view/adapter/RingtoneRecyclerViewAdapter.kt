@@ -1,5 +1,6 @@
 package com.project.alio.view.adapter
 
+import android.media.Ringtone
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,8 @@ class RingtoneRecyclerViewAdapter: RecyclerView.Adapter<RingtoneRecyclerViewAdap
 
     private val dataList = mutableListOf<RingTone>()
     private var selectedPosition: Int = -1
+    private var isUpdate: Boolean = false
+    private var ringtoneData: RingTone? = null
     private lateinit var onItemClickListener: OnItemClickListener
 
     interface OnItemClickListener {
@@ -20,6 +23,13 @@ class RingtoneRecyclerViewAdapter: RecyclerView.Adapter<RingtoneRecyclerViewAdap
         dataList.clear()
         dataList.addAll(list)
         notifyDataSetChanged()
+    }
+
+    fun isUpdate(state: Boolean, ringtone: RingTone?) {
+        if (state) {
+            isUpdate = true
+            ringtoneData = ringtone
+        }
     }
 
     fun setOnItemClickListener(listener: (String, String) -> Unit) {
@@ -46,6 +56,9 @@ class RingtoneRecyclerViewAdapter: RecyclerView.Adapter<RingtoneRecyclerViewAdap
         holder.binding.ringtoneSelect.isChecked = position == selectedPosition
         holder.binding.ringtoneSelect.setOnCheckedChangeListener { _, b ->
             if (b) {
+                if (dataList[position] == ringtoneData) {
+                    holder.binding.ringtoneSelect.isChecked = true
+                }
                 selectedPosition = holder.adapterPosition
                 onItemClickListener.onClick(dataList[position].title, dataList[position].uri)
                 notifyDataSetChanged()

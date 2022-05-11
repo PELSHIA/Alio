@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.data.db.sharedpreferences.RingtonePreferences
 import com.project.alio.util.receiver.AlarmBroadcastReceiver
 import com.example.domain.model.Alarm
+import com.example.domain.model.RingTone
 import com.project.alio.R
 import com.project.alio.databinding.FragmentAlarmSettingBinding
 import com.project.alio.view.activity.AlarmSettingActivity
@@ -32,10 +33,10 @@ import kotlin.collections.ArrayList
 class AlarmSettingFragment : Fragment() {
 
     private lateinit var binding: FragmentAlarmSettingBinding
+    private val alarmManager: AlarmManager by lazy { activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager }
     private val viewModel: AlarmViewModel by viewModels()
     private val calendar: Calendar = Calendar.getInstance()
     private var alarm_id: Long = 0
-    private lateinit var alarmManager: AlarmManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +44,6 @@ class AlarmSettingFragment : Fragment() {
     ): View? {
         binding = FragmentAlarmSettingBinding.inflate(inflater, container, false)
         binding.activity = activity as AlarmSettingActivity?
-        Log.d("onCreateView", binding.alarmHourPicker.value.toString())
         return binding.root
     }
 
@@ -56,7 +56,7 @@ class AlarmSettingFragment : Fragment() {
         observe()
         bindCheckButton()
         setRingtone()
-        Log.d("onCreateView", binding.alarmHourPicker.value.toString())
+        initData()
     }
 
     private fun initView() {
@@ -93,6 +93,12 @@ class AlarmSettingFragment : Fragment() {
         binding.missionSpinner.adapter = missionAdapter
     }
 
+    private fun initData() { // to Update Alarm
+        if (requireActivity().intent.hasExtra("state")) {
+            viewModel.selectAlarm(requireActivity().intent.getIntExtra("id", 0))
+        }
+    }
+
     private fun bindSpinner() {
         binding.categorySpinner.setOnItemClickListener { _, _, position, _ ->
             when (position) {
@@ -111,19 +117,22 @@ class AlarmSettingFragment : Fragment() {
 
     private fun bindCheckButton() {
         binding.alarmSettingCheck.setOnClickListener {
-            Log.d("isDaySelect", isDaySelect().toString())
-            when {
-                binding.alarmSettingName.text.isEmpty() -> {
-                    Toast.makeText(activity, "알람명을 작성해주세요", Toast.LENGTH_SHORT).show()
-                }
-                RingtonePreferences.ringtone == null -> {
-                    Toast.makeText(activity, "밸소리를 세팅해주세요", Toast.LENGTH_SHORT).show()
-                }
-                !isDaySelect() -> {
-                    Toast.makeText(activity, "요일을 선택해주세요", Toast.LENGTH_SHORT).show()
-                }
-                else -> {
-                    setAlarmData()
+            if (requireActivity().intent.hasExtra("state")) {
+                updateAlarmData()
+            } else {
+                when {
+                    binding.alarmSettingName.text.isEmpty() -> {
+                        Toast.makeText(activity, "알람명을 작성해주세요", Toast.LENGTH_SHORT).show()
+                    }
+                    RingtonePreferences.ringtone == null -> {
+                        Toast.makeText(activity, "밸소리를 세팅해주세요", Toast.LENGTH_SHORT).show()
+                    }
+                    !isDaySelect() -> {
+                        Toast.makeText(activity, "요일을 선택해주세요", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        setAlarmData()
+                    }
                 }
             }
         }
@@ -151,6 +160,29 @@ class AlarmSettingFragment : Fragment() {
         settingAlarm(dayOfWeek)
     }
 
+    private fun updateAlarmData() {
+        setCalendar()
+        val id = requireActivity().intent.getIntExtra("id", 0)
+        val dayOfWeek = getDayOfWeek()
+        val alarmName = binding.alarmSettingName.text.toString()
+        val category = binding.categorySpinner.selectedItem.toString()
+        val mission = binding.missionSpinner.selectedItem.toString()
+        val ringtone = RingtonePreferences.ringtone
+        viewModel.updateAlarm(
+            Alarm(
+                id,
+                alarmName,
+                calendar,
+                dayOfWeek,
+                category,
+                mission,
+                ringtone!!
+            )
+        )
+        deleteAlarm(dayOfWeek) // PendingIntent 가 동시에 존재하는 경우가 있기때문에 FLAG 를 사용하지 않으므로 삭제후 생성
+        settingAlarm(dayOfWeek)
+    }
+
     private fun setCalendar() {
         calendar.apply {
             set(Calendar.HOUR_OF_DAY, binding.alarmHourPicker.value)
@@ -162,7 +194,6 @@ class AlarmSettingFragment : Fragment() {
 
     private fun settingAlarm(day: List<Boolean>) {
         val pIntent: PendingIntent = settingIntent(day)
-        alarmManager = activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
@@ -170,6 +201,16 @@ class AlarmSettingFragment : Fragment() {
             pIntent
         )
         activityPopStack()
+    }
+
+    private fun deleteAlarm(day: List<Boolean>) {
+        val id = requireActivity().intent.getIntExtra("id", 0)
+        val intent = Intent(activity, AlarmBroadcastReceiver::class.java)
+        val dayOfWeek: ArrayList<Boolean> = arrayListOf()
+        val pendingIntent = PendingIntent.getBroadcast(activity, id, intent, 0)
+        dayOfWeek.addAll(day)
+        intent.putExtra("dayOfWeek", dayOfWeek)
+        alarmManager.cancel(pendingIntent)
     }
 
     private fun activityPopStack() {
@@ -202,6 +243,53 @@ class AlarmSettingFragment : Fragment() {
         alarmId.observe(viewLifecycleOwner) {
             alarm_id = it
         }
+        alarm.observe(viewLifecycleOwner) {
+            setPickerData(it.time)
+            setDayOfWeek(it.dayOfWeek)
+            binding.alarmSettingName.setText(it.name)
+            setCategoryData(it.category)
+            setMissionData(it.mission)
+            RingtonePreferences.ringtone = it.ringtone
+        }
+    }
+
+    private fun setPickerData(time: Calendar) {
+        val hour = time.get(Calendar.HOUR_OF_DAY)
+        val min = time.get(Calendar.MINUTE)
+        binding.alarmHourPicker.value = hour
+        binding.alarmMinutePicker.value = min
+    }
+
+    private fun setDayOfWeek(day: List<Boolean>) {
+        day.forEachIndexed { index, isSelect ->
+            when (index) {
+                0 -> binding.sunday.isChecked = isSelect
+                1 -> binding.monday.isChecked = isSelect
+                2 -> binding.tuesday.isChecked = isSelect
+                3 -> binding.wednesday.isChecked = isSelect
+                4 -> binding.Thursday.isChecked = isSelect
+                5 -> binding.friday.isChecked = isSelect
+                6 -> binding.saturday.isChecked = isSelect
+            }
+        }
+    }
+
+    private fun setCategoryData(category: String) {
+
+    }
+
+    private fun setMissionData(mission: String) {
+        when (mission) {
+            "할 일 작성" -> {
+                binding.missionSpinner.setSelection(0)
+            }
+            "사진 찍기" -> {
+                binding.missionSpinner.setSelection(1)
+            }
+            "명언 따라쓰기" -> {
+                binding.missionSpinner.setSelection(2)
+            }
+        }
     }
 
     private fun isDaySelect(): Boolean {
@@ -214,28 +302,8 @@ class AlarmSettingFragment : Fragment() {
         binding.saturday.isChecked
     }
 
-    override fun onStop() {
-        super.onStop()
-        Log.d("onStop", binding.alarmHourPicker.value.toString())
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("onStart", binding.alarmHourPicker.value.toString())
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("onResume", binding.alarmHourPicker.value.toString())
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         RingtonePreferences.clear()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("onDestroyView", binding.alarmHourPicker.value.toString())
     }
 }

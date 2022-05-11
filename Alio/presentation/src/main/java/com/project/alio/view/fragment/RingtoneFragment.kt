@@ -34,6 +34,7 @@ class RingtoneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        initRingtone()
         navigate()
     }
 
@@ -65,6 +66,14 @@ class RingtoneFragment : Fragment() {
         }
         cursor.close()
         return ringtoneList
+    }
+
+    private fun initRingtone() {
+        if (RingtonePreferences.ringtone == null) {
+            recyclerViewAdapter.isUpdate(false, null)
+        } else {
+            recyclerViewAdapter.isUpdate(true, RingtonePreferences.ringtone)
+        }
     }
 
     private fun navigate() {
