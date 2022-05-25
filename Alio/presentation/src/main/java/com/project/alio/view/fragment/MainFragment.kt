@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.model.Alarm
 import com.project.alio.R
 import com.project.alio.databinding.FragmentMainBinding
+import com.project.alio.util.alarm.AlarmUtil
 import com.project.alio.util.decorator.RecyclerViewDecoration
 import com.project.alio.util.receiver.AlarmBroadcastReceiver
 import com.project.alio.view.activity.AlarmSettingActivity
 import com.project.alio.view.adapter.AlarmRecyclerViewAdapter
 import com.project.alio.viewModel.AlarmViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -27,6 +31,8 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var recyclerAdapter: AlarmRecyclerViewAdapter
     private val viewModel: AlarmViewModel by viewModels()
+    private val alarmManager: AlarmManager by lazy { activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +45,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        observe()
         initRecyclerView()
         enableBottomSheet()
     }
@@ -60,16 +67,6 @@ class MainFragment : Fragment() {
 
     private fun setRecyclerViewData() {
         viewModel.allAlarmList()
-        viewModel.alarmList.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) {
-                binding.emptyAlarm.visibility = View.VISIBLE
-                binding.alarmRecyclerView.visibility = View.GONE
-            } else {
-                binding.emptyAlarm.visibility = View.GONE
-                binding.alarmRecyclerView.visibility = View.VISIBLE
-                recyclerAdapter.setData(it)
-            }
-        }
     }
 
     private fun enableBottomSheet() {
@@ -97,15 +94,28 @@ class MainFragment : Fragment() {
                 startActivity(intent)
             }
             false -> { // Delete
-                val dayOfWeek: ArrayList<Boolean> = arrayListOf()
-                val intent = Intent(activity, AlarmBroadcastReceiver::class.java)
-                val pendingIntent = PendingIntent.getBroadcast(activity, alarm.id, intent, 0)
-                val alarmManager = activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                dayOfWeek.addAll(alarm.dayOfWeek)
-                intent.putExtra("dayOfWeek", dayOfWeek)
-                alarmManager.cancel(pendingIntent)
-                viewModel.deleteAlarm(alarm) // Local DB Delete
+                AlarmUtil().settingAlarm(requireActivity(), alarm.time, alarm.id, alarm.dayOfWeek, 2)
+                viewModel.deleteAlarm(alarm) // L/ocal DB Delete
                 recyclerAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun nextAlarm(alarmList: List<Alarm>) {
+//        val nextAlarm = alarmManager.nextAlarmClock
+//        Log.d("nextAlarm", "$nextAlarm" )
+    }
+
+    private fun observe() = with(viewModel) {
+        alarmList.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.emptyAlarm.visibility = View.VISIBLE
+                binding.alarmRecyclerView.visibility = View.GONE
+            } else {
+                binding.emptyAlarm.visibility = View.GONE
+                binding.alarmRecyclerView.visibility = View.VISIBLE
+                nextAlarm(it)
+                recyclerAdapter.setData(it)
             }
         }
     }
