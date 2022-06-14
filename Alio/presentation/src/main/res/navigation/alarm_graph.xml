@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alarm_graph"
+    app:startDestination="@id/alarmFragment">
+
+    <fragment
+        android:id="@+id/alarmFragment"
+        android:name="com.project.alio.view.fragment.AlarmFragment"
+        android:label="AlarmFragment"
+        tools:layout="@layout/fragment_alarm">
+        <action
+            android:id="@+id/action_alarmFragment_to_missionTodoListFragment"
+            app:destination="@id/missionTodoListFragment" />
+        <action
+            android:id="@+id/action_alarmFragment_to_missionPictureFragment"
+            app:destination="@id/missionPictureFragment" />
+        <action
+            android:id="@+id/action_alarmFragment_to_missionQuoteFragment"
+            app:destination="@id/missionQuoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/missionPictureFragment"
+        android:name="com.project.alio.view.fragment.MissionPictureFragment"
+        android:label="MissionPictureFragment"
+        tools:layout="@layout/fragment_mission_picture"/>
+    <fragment
+        android:id="@+id/missionTodoListFragment"
+        android:name="com.project.alio.view.fragment.MissionTodoListFragment"
+        android:label="MissionTodoListFragment"
+        tools:layout="@layout/fragment_mission_todo_list"/>
+    <fragment
+        android:id="@+id/missionQuoteFragment"
+        android:name="com.project.alio.view.fragment.MissionQuoteFragment"
+        android:label="MissionQuoteFragment"
+        tools:layout="@layout/fragment_mission_quote"/>
+</navigation>
