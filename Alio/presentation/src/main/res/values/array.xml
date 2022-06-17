@@ -10,4 +10,30 @@
         <item>사진 찍기</item>
         <item>명언 따라쓰기</item>
     </string-array>
+
+    <string-array name="array_quote">
+        <item>나 자신을 알라</item>
+        <item>일찍 일어나는 새가 벌레를 잡는다.</item>
+        <item>친구는 기쁨을 두배로 만들고 슬픔은 밤으로 줄인다.</item>
+        <item>지나간 슬픔에 새 눈물을 낭비하지 마라</item>
+        <item>훌륭한 말은 훌륭한 무기이다.</item>
+        <item>고통 뒤의 즐거움은 달콤하다.</item>
+        <item>하늘은 행동하지 않는 사람은 결코 돕지 않는다.</item>
+        <item>성공의 비결은 좌절하지 않고 극복하는데 있다.</item>
+        <item>자식을 길러분 후에야 부모의 마음을 안다.</item>
+        <item>하나의 선행은 다른 선행을 부른다.</item>
+    </string-array>
+
+    <string-array name="array_quote_name">
+        <item>소크라테스</item>
+        <item>캠던</item>
+        <item>실러</item>
+        <item>에우리피데스</item>
+        <item>풀러</item>
+        <item>존 드라이든</item>
+        <item>소포클레스</item>
+        <item>발자크</item>
+        <item>왕양명</item>
+        <item>헤이우드</item>
+    </string-array>
 </resources>
