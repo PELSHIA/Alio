@@ -1,11 +1,7 @@
 package com.project.alio.view.fragment
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,17 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.model.Alarm
-import com.project.alio.R
 import com.project.alio.databinding.FragmentMainBinding
-import com.project.alio.util.alarm.AlarmUtil
+import com.project.alio.util.manager.SettingAlarmManager
 import com.project.alio.util.decorator.RecyclerViewDecoration
-import com.project.alio.util.receiver.AlarmBroadcastReceiver
 import com.project.alio.view.activity.AlarmSettingActivity
 import com.project.alio.view.adapter.AlarmRecyclerViewAdapter
 import com.project.alio.viewModel.AlarmViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -31,8 +23,6 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var recyclerAdapter: AlarmRecyclerViewAdapter
     private val viewModel: AlarmViewModel by viewModels()
-    private val alarmManager: AlarmManager by lazy { activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,8 +84,8 @@ class MainFragment : Fragment() {
                 startActivity(intent)
             }
             false -> { // Delete
-                AlarmUtil().settingAlarm(requireActivity(), alarm.time, alarm.id, alarm.dayOfWeek, 2)
-                viewModel.deleteAlarm(alarm) // L/ocal DB Delete
+                SettingAlarmManager().settingAlarm(requireActivity(), alarm.time, alarm, 2)
+                viewModel.deleteAlarm(alarm) // Local DB Delete
                 recyclerAdapter.notifyDataSetChanged()
             }
         }
