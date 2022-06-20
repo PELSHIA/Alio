@@ -1,4 +1,4 @@
-package com.project.alio.util
+package com.project.alio.util.manager
 
 import android.app.Activity
 import android.content.Context

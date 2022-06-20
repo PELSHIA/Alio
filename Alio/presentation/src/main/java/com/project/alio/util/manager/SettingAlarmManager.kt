@@ -1,4 +1,4 @@
-package com.project.alio.util.alarm
+package com.project.alio.util.manager
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -8,7 +8,7 @@ import com.project.alio.util.receiver.AlarmBroadcastReceiver
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AlarmUtil {
+class SettingAlarmManager {
     private lateinit var manager: AlarmManager
 
     private fun listToArrayList(list: List<Boolean>): ArrayList<Boolean> {
@@ -17,12 +17,13 @@ class AlarmUtil {
         return arrayList
     }
 
-    fun settingAlarm(context: Context, time: Calendar, alarmId: Int, dayOfWeek: List<Boolean>, state: Int) {
+    fun settingAlarm(context: Context, time: Calendar, alarmId: Int, dayOfWeek: List<Boolean>, mission: String, state: Int) {
         manager = context.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val day: ArrayList<Boolean> = listToArrayList(dayOfWeek)
         val intent = Intent(context, AlarmBroadcastReceiver::class.java)
         intent.putExtra("dayOfWeek", day)
-        val pIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0)
+        intent.putExtra("mission", mission)
+        val pIntent = PendingIntent.getBroadcast(context, alarmId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         when (state) {
             1 -> startAlarm(pIntent, time)
             2 -> cancelAlarm(pIntent)

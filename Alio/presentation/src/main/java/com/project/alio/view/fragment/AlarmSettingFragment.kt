@@ -1,7 +1,5 @@
 package com.project.alio.view.fragment
 
-import android.app.AlarmManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +14,7 @@ import com.example.data.db.sharedpreferences.RingtonePreferences
 import com.example.domain.model.Alarm
 import com.project.alio.R
 import com.project.alio.databinding.FragmentAlarmSettingBinding
-import com.project.alio.util.alarm.AlarmUtil
+import com.project.alio.util.manager.SettingAlarmManager
 import com.project.alio.view.activity.AlarmSettingActivity
 import com.project.alio.view.activity.MainActivity
 import com.project.alio.viewModel.AlarmViewModel
@@ -28,7 +26,6 @@ import java.util.*
 class AlarmSettingFragment : Fragment() {
 
     private lateinit var binding: FragmentAlarmSettingBinding
-    private val alarmManager: AlarmManager by lazy { activity?.applicationContext?.getSystemService(Context.ALARM_SERVICE) as AlarmManager }
     private val viewModel: AlarmViewModel by viewModels()
     private var alarmId: Long = 0
 
@@ -151,7 +148,7 @@ class AlarmSettingFragment : Fragment() {
                 ringtone!!
             )
         )
-        AlarmUtil().settingAlarm(requireActivity(), time, alarmId.toInt(), dayOfWeek, 1)
+        SettingAlarmManager().settingAlarm(requireActivity(), time, alarmId.toInt(), dayOfWeek, mission,1)
         activityPopStack()
     }
 
@@ -174,7 +171,7 @@ class AlarmSettingFragment : Fragment() {
                 ringtone!!
             )
         )
-        AlarmUtil().settingAlarm(requireActivity(), time, id, dayOfWeek, 3)
+        SettingAlarmManager().settingAlarm(requireActivity(), time, id, dayOfWeek, mission, 3)
         activityPopStack()
     }
 
