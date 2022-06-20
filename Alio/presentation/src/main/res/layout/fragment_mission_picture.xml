@@ -9,7 +9,7 @@
         tools:context=".view.fragment.MissionPictureFragment">
 
         <TextView
-            android:id="@+id/alarm_todo"
+            android:id="@+id/alarm_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -20,14 +20,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/alarm_todo_title"
+            android:id="@+id/alarm_picture_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="의미있는 사진을 \n찍어보세요!"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@id/alarm_todo"
-            app:layout_constraintTop_toBottomOf="@id/alarm_todo" />
+            app:layout_constraintStart_toStartOf="@id/alarm_picture"
+            app:layout_constraintTop_toBottomOf="@id/alarm_picture" />
 
         <ImageView
             android:id="@+id/alarm_picture_img"
@@ -37,9 +37,10 @@
             tools:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/alarm_todo_title" />
+            app:layout_constraintTop_toBottomOf="@id/alarm_picture_title" />
 
         <ImageView
+            android:id="@+id/alarm_picture_camera"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_marginTop="45dp"
