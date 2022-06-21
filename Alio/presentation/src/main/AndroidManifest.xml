@@ -29,7 +29,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".util.receiver.AlarmBroadcastReceiver" />
+
+        <receiver
+            android:name=".util.receiver.AlarmBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name=".util.receiver.AlarmBroadcastReceiver" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".util.service.AlarmService" android:exported="true" />
     </application>
 
 </manifest>
