@@ -41,7 +41,6 @@ class AlarmSettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-//        bindSpinner()
         observe()
         bindCheckButton()
         setRingtone()
@@ -90,16 +89,6 @@ class AlarmSettingFragment : Fragment() {
         }
     }
 
-    private fun bindSpinner() {
-        binding.categorySpinner.setOnItemClickListener { _, _, position, _ ->
-            when (position) {
-                1 -> {
-                    TODO("카테고리 추가 다이얼로그 띄우기")
-                }
-            }
-        }
-    }
-
     private fun setRingtone() {
         binding.ringtone.setOnClickListener {
             findNavController().navigate(R.id.action_alarmSettingFragment_to_ringtoneFragment)
@@ -136,19 +125,11 @@ class AlarmSettingFragment : Fragment() {
         val category = binding.categorySpinner.selectedItem.toString()
         val mission = binding.missionSpinner.selectedItem.toString()
         val ringtone = RingtonePreferences.ringtone
-
+        val alarm = Alarm(0, alarmName, time, dayOfWeek, category, mission, ringtone!!)
         viewModel.insertAlarm(
-            Alarm(
-                0,
-                alarmName,
-                time,
-                dayOfWeek,
-                category,
-                mission,
-                ringtone!!
-            )
+            alarm
         )
-        SettingAlarmManager().settingAlarm(requireActivity(), time, alarmId.toInt(), dayOfWeek, mission,1)
+        SettingAlarmManager().settingAlarm(requireActivity(), time, alarm,1)
         activityPopStack()
     }
 
@@ -160,18 +141,9 @@ class AlarmSettingFragment : Fragment() {
         val category = binding.categorySpinner.selectedItem.toString()
         val mission = binding.missionSpinner.selectedItem.toString()
         val ringtone = RingtonePreferences.ringtone
-        viewModel.updateAlarm(
-            Alarm(
-                id,
-                alarmName,
-                setCalendar(),
-                dayOfWeek,
-                category,
-                mission,
-                ringtone!!
-            )
-        )
-        SettingAlarmManager().settingAlarm(requireActivity(), time, id, dayOfWeek, mission, 3)
+        val alarm: Alarm = Alarm(id, alarmName, setCalendar(), dayOfWeek, category, mission, ringtone!!)
+        viewModel.updateAlarm(alarm)
+        SettingAlarmManager().settingAlarm(requireActivity(), time, alarm, 3)
         activityPopStack()
     }
 

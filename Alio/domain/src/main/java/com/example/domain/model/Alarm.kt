@@ -1,5 +1,6 @@
 package com.example.domain.model
 
+import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -11,4 +12,4 @@ data class Alarm(
     val category: String,
     val mission: String,
     val ringtone: RingTone
-)
+): Serializable
