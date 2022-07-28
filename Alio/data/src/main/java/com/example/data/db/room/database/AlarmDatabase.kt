@@ -31,7 +31,7 @@ abstract class AlarmDatabase : RoomDatabase() {
                 instance = Room.databaseBuilder(
                     context.applicationContext,
                     AlarmDatabase::class.java,
-                    "bookmark_table"
+                    "alarm_table"
                 )
                     .addTypeConverter(RingtoneTypeConverter(Gson()))
                     .addTypeConverter(CalendarTypeConverter(Gson()))
